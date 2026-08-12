@@ -19,13 +19,13 @@ end
 local BaseUrl = "https://raw.githubusercontent.com/PersonaOrigFromTG/NyxHub/main/icons/"
 
 local IconFiles = {
-    home = "home.png",
-    user = "user.png",
-    eye = "eye.png",
-    tools = "tools.png",
-    settings = "settings.png",
-    minus = "minus.png",
-    x = "x.png"
+    home = "home.svg",
+    user = "user.svg",
+    eye = "eye.svg",
+    tools = "tools.svg",
+    settings = "settings.svg",
+    minus = "minus.svg",
+    x = "x.svg"
 }
 
 local IconCache = {}
