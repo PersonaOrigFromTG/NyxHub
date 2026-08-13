@@ -33,6 +33,7 @@ local IconCache = {}
 local function getAsset(path)
     if getcustomasset then
         local ok, result = pcall(getcustomasset, path)
+
         if ok and result then
             return result
         end
@@ -40,6 +41,7 @@ local function getAsset(path)
 
     if getsynasset then
         local ok, result = pcall(getsynasset, path)
+
         if ok and result then
             return result
         end
@@ -179,7 +181,7 @@ local function CreateHeaderButton(iconName, fallback, offset)
     local Icon = Instance.new("ImageLabel")
     Icon.AnchorPoint = Vector2.new(0.5, 0.5)
     Icon.Position = UDim2.fromScale(0.5, 0.5)
-    Icon.Size = UDim2.fromOffset(17, 17)
+    Icon.Size = UDim2.fromOffset(20, 20)
     Icon.BackgroundTransparency = 1
     Icon.ImageColor3 = Color3.fromRGB(175, 176, 187)
     Icon.Visible = false
@@ -208,7 +210,9 @@ local function CreateHeaderButton(iconName, fallback, offset)
         TweenService:Create(
             Button,
             TweenInfo.new(0.15),
-            {BackgroundColor3 = Color3.fromRGB(32, 33, 42)}
+            {
+                BackgroundColor3 = Color3.fromRGB(32, 33, 42)
+            }
         ):Play()
     end)
 
@@ -216,7 +220,9 @@ local function CreateHeaderButton(iconName, fallback, offset)
         TweenService:Create(
             Button,
             TweenInfo.new(0.15),
-            {BackgroundColor3 = Color3.fromRGB(24, 25, 32)}
+            {
+                BackgroundColor3 = Color3.fromRGB(24, 25, 32)
+            }
         ):Play()
     end)
 
@@ -356,7 +362,9 @@ local function CreateToggle(name, y, default)
             TweenService:Create(
                 Button,
                 TweenInfo.new(0.15),
-                {BackgroundColor3 = bg}
+                {
+                    BackgroundColor3 = bg
+                }
             ):Play()
 
             TweenService:Create(
@@ -366,7 +374,9 @@ local function CreateToggle(name, y, default)
                     Enum.EasingStyle.Quint,
                     Enum.EasingDirection.Out
                 ),
-                {Position = pos}
+                {
+                    Position = pos
+                }
             ):Play()
         end
     end
@@ -412,6 +422,11 @@ local function SetTab(name)
     for tabName, data in pairs(Tabs) do
         local active = tabName == name
 
+        local textColor =
+            active
+            and Color3.fromRGB(224, 215, 255)
+            or Color3.fromRGB(145, 146, 158)
+
         TweenService:Create(
             data.Button,
             TweenInfo.new(0.15),
@@ -427,22 +442,25 @@ local function SetTab(name)
             data.Label,
             TweenInfo.new(0.15),
             {
-                TextColor3 =
-                    active
-                    and Color3.fromRGB(224, 215, 255)
-                    or Color3.fromRGB(145, 146, 158)
+                TextColor3 = textColor
             }
         ):Play()
 
-        data.Icon.ImageColor3 =
-            active
-            and Color3.fromRGB(173, 148, 255)
-            or Color3.fromRGB(135, 136, 150)
+        TweenService:Create(
+            data.Icon,
+            TweenInfo.new(0.15),
+            {
+                ImageColor3 = textColor
+            }
+        ):Play()
 
-        data.Fallback.TextColor3 =
-            active
-            and Color3.fromRGB(173, 148, 255)
-            or Color3.fromRGB(135, 136, 150)
+        TweenService:Create(
+            data.Fallback,
+            TweenInfo.new(0.15),
+            {
+                TextColor3 = textColor
+            }
+        ):Play()
     end
 
     PageTitle.Text = name
@@ -474,27 +492,27 @@ local function CreateTab(name, order)
 
     local Icon = Instance.new("ImageLabel")
     Icon.AnchorPoint = Vector2.new(0.5, 0.5)
-    Icon.Position = UDim2.new(0, 18, 0.5, 0)
-    Icon.Size = UDim2.fromOffset(17, 17)
+    Icon.Position = UDim2.new(0, 19, 0.5, 0)
+    Icon.Size = UDim2.fromOffset(20, 20)
     Icon.BackgroundTransparency = 1
-    Icon.ImageColor3 = Color3.fromRGB(135, 136, 150)
+    Icon.ImageColor3 = Color3.fromRGB(145, 146, 158)
     Icon.Visible = false
     Icon.Parent = Button
 
     local Fallback = Instance.new("TextLabel")
     Fallback.AnchorPoint = Vector2.new(0.5, 0.5)
-    Fallback.Position = UDim2.new(0, 18, 0.5, 0)
-    Fallback.Size = UDim2.fromOffset(20, 20)
+    Fallback.Position = UDim2.new(0, 19, 0.5, 0)
+    Fallback.Size = UDim2.fromOffset(22, 22)
     Fallback.BackgroundTransparency = 1
     Fallback.Text = info.fallback
-    Fallback.TextColor3 = Color3.fromRGB(135, 136, 150)
-    Fallback.TextSize = 15
+    Fallback.TextColor3 = Color3.fromRGB(145, 146, 158)
+    Fallback.TextSize = 16
     Fallback.Font = Enum.Font.GothamMedium
     Fallback.Parent = Button
 
     local Label = Instance.new("TextLabel")
-    Label.Position = UDim2.fromOffset(37, 0)
-    Label.Size = UDim2.new(1, -43, 1, 0)
+    Label.Position = UDim2.fromOffset(39, 0)
+    Label.Size = UDim2.new(1, -45, 1, 0)
     Label.BackgroundTransparency = 1
     Label.Text = name
     Label.TextColor3 = Color3.fromRGB(145, 146, 158)
